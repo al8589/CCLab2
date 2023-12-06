@@ -1,15 +1,24 @@
 body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden; /* This will prevent scrollbars if the canvas is larger than the window */
-  }
- 
-  .text-container h1 {
-    color: white;
-    font-family: 'Nanum Pen Script', cursive;
-    text-align: center;
-    position: relative; /* Add position to use z-index */
-    z-index: 2; /* Ensure the text container is above the canvas */
-  }
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* This will prevent scrollbars if the canvas is larger than the window */
+}
 
+#canvasWrapper {
+  position: absolute;
+  z-index: 1; /* Lower z-index than text-container */
+}
 
+.text-container {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2; /* Higher z-index to ensure visibility above the canvas */
+}
+
+.text-container h1 {
+  color: white;
+  font-family: 'Nanum Pen Script', cursive;
+  text-align: center;
+}

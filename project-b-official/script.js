@@ -26,8 +26,6 @@ function setup() {
 
 function draw() {
   if(!mySound.isPlaying()){
-
-
     mySound.loop();
   }
   clear();

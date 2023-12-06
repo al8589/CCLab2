@@ -2,7 +2,7 @@ console.log("Script started"); // Log to check if the script file is loaded
 
 let player;
 let trees = [];
-let treeCount = 11;
+let treeCount = 21;
 let fogParticles = [];
 
 let mySound; // Declare the sound variable here
@@ -52,20 +52,21 @@ function setup() {
 }
 
 function draw() {
-  background(33, 26, 23);
+  background(13, 10, 10);
+
+  // Update and display the player first
+  player.update();
+  player.display();
 
   fogParticles.forEach(particle => {
     particle.move();
     particle.display();
   });
 
+  // Then draw the trees on top of the player
   for (let tree of trees) {
     tree.display();
-    player.collide(tree);
   }
-
-  player.update();
-  player.display();
 }
 
 function keyPressed() {
@@ -183,15 +184,6 @@ class Player {
   stopY() {
     this.speedY = 0;
   }
-
-  collide(tree) {
-    let d = dist(this.x, this.y, tree.x, tree.y);
-    if (d < this.size / 4 + tree.radius) {
-      this.x -= this.speedX;
-      this.y -= this.speedY;
-      this.speedX = this.speedY = 0;
-    }
-  }
 }
 
 class Tree {
@@ -203,6 +195,6 @@ class Tree {
 
   display() {
     imageMode(CENTER);
-    image(treeImage, this.x, this.y, this.radius * 20, this.radius * 20);
+    image(treeImage, this.x, this.y, this.radius * 15, this.radius * 15);
   }
 }

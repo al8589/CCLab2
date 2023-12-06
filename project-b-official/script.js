@@ -10,12 +10,16 @@ function preload() {
 }
 
 
+var rain = [];
+var speed;
+
 function setup() {
   var canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('canvasWrapper');
   for (var i = 0; i < 800; i++) {
     rain[i] = new Rain();
   }
+
   mySound.play();
 }
 
@@ -29,7 +33,14 @@ function draw() {
   clear();
   var distance = dist(mouseX, mouseY, width / 2, height / 2);
   speed = map(distance, 0, dist(0, 0, width / 2, height / 2), 35, 0);
- 
+
+}
+
+function draw() {
+  clear();
+  var distance = dist(mouseX, mouseY, width / 2, height / 2);
+  speed = map(distance, 0, dist(0, 0, width / 2, height / 2), 35, 0);
+  
   translate(width / 2, height / 2);
   for (var i = 0; i < rain.length; i++) {
     rain[i].update();

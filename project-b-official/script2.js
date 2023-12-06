@@ -4,9 +4,13 @@ let player;
 let trees = [];
 let treeCount = 21;
 let fogParticles = [];
+let flashlight;
+let flashlightFound = false;
+let btn;
 
 let mySound; // Declare the sound variable here
 let treeImage;
+let flashlightImage; // Declare flashlight image variable
 
 function preload() {
   console.log("Preloading assets"); // Log to check if preload is called
@@ -20,6 +24,11 @@ function preload() {
   }, function(error) {
     console.error("Error loading image:", error); // Log if there is an error
   });
+  flashlightImage = loadImage("lib/images/flashlight.png", function() {
+    console.log("Flashlight image loaded successfully");
+  }, function(error) {
+    console.error("Error loading flashlight image:", error);
+  });
 }
 
 function setup() {
@@ -28,6 +37,12 @@ function setup() {
   canvas.style('display', 'block');
   canvas.parent('canvasWrapper'); // Ensure canvas is inserted into the right container
   player = new Player();
+
+  flashlight = {
+    x: random(width),
+    y: random(height),
+    size: 50 // Adjust size as needed
+  };
 
   for (let i = 0; i < treeCount; i++) {
     let tree = new Tree(random(width), random(height), 20);
@@ -54,7 +69,6 @@ function setup() {
 function draw() {
   background(13, 10, 10);
 
-  // Update and display the player first
   player.update();
   player.display();
 
@@ -63,10 +77,30 @@ function draw() {
     particle.display();
   });
 
-  // Then draw the trees on top of the player
   for (let tree of trees) {
     tree.display();
   }
+
+  if (!flashlightFound) {
+    image(flashlightImage, flashlight.x, flashlight.y, flashlight.size, flashlight.size);
+    if (dist(player.x, player.y, flashlight.x, flashlight.y) < (player.size / 2 + flashlight.size / 2)) {
+      flashlightFound = true;
+      createFoundButton();
+    }
+  }
+}
+
+function createFoundButton() {
+  if (!btn) {
+    btn = createButton('Found it!');
+    btn.position(width / 2 - 50, height / 2 - 25);
+    btn.mousePressed(goToNextPage);
+    btn.style('z-index', '2'); // Ensure the button is above the canvas
+  }
+}
+
+function goToNextPage() {
+  window.location.href = 'page3.html'; // Replace with the correct URL to your next page
 }
 
 function keyPressed() {

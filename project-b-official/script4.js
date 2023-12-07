@@ -32,8 +32,10 @@ function draw() {
     drawPlayer(mouseX, height - 50);
   }
 
-  // Hide the button initially
-  if (nextButton) nextButton.hide();
+  // Hide the button if the game is not over
+  if (nextButton && !gameOver) {
+    nextButton.hide();
+  }
 }
 
 function spawnEnemies(count) {
@@ -61,7 +63,7 @@ function updateEnemies() {
     let enemy = enemies[i];
     enemy.y += 2;
     if (enemy.y - enemyImage.height / 2 > height) {
-      endGame("You Failed! Reload to try again.");
+      endGame("You Failed! Reload to try again.", false);
     } else {
       image(enemyImage, enemy.x, enemy.y, enemyImage.width / 3, enemyImage.height / 3);
     }
@@ -73,7 +75,7 @@ function updateEnemies() {
         bullets.splice(j, 1);
         score++;
         if (score >= totalEnemies) {
-          endGame("You made it!");
+          endGame("You made it!", true);
         }
         break;
       }
@@ -97,20 +99,21 @@ function mousePressed() {
   }
 }
 
-function endGame(message) {
+function endGame(message, success) {
   textAlign(CENTER);
   textSize(32);
   fill(255);
   text(message, width / 2, height / 2 - 40);
-
-  // Create the button if it hasn't been created yet and the game is over
-  if (!nextButton && gameOver) {
-    nextButton = createButton('Next Page');
-    nextButton.position(width / 2 - nextButton.width / 2, height / 2 + 40);
-    nextButton.mousePressed(() => window.location.href = 'page5.html'); // Change to your actual URL
-  }
-
-  nextButton.show(); // Show the button
   gameOver = true;
   noLoop();
+
+  // Only create the button if the player has won
+  if (success) {
+    if (!nextButton) {
+      nextButton = createButton('Home is just up front.');
+      nextButton.position(width / 2 - nextButton.width / 2, height / 2 + 40);
+      nextButton.mousePressed(() => window.location.href = 'page5.html'); // Change to your actual URL
+    }
+    nextButton.show();
+  }
 }

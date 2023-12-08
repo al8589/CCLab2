@@ -25,14 +25,12 @@ function setup() {
 }
 
 function draw() {
-  // Draw the current background and the drawing buffer
   background(currentBackground);
   image(drawingBuffer, 0, 0);
 
-  // If the mouse is pressed, draw on the buffer
   if (drawing) {
-    drawingBuffer.stroke(0); // Set line color to black
-    drawingBuffer.strokeWeight(3); // Set line thickness
+    drawingBuffer.stroke(0);
+    drawingBuffer.strokeWeight(3); 
     drawingBuffer.line(mouseX, mouseY, pmouseX, pmouseY);
   }
 }
@@ -46,10 +44,8 @@ function mouseReleased() {
 }
 
 function keyPressed() {
-  if (key === ' ') { // Check if the spacebar is pressed
-    // Toggle the background
+  if (key === ' ') { 
     currentBackground = currentBackground === darkTreeBarkImage ? lightTreeBarkImage : darkTreeBarkImage;
-    // Redraw the background to apply the change
     drawingBuffer.background(currentBackground); // Apply background change to the drawing buffer
   }
 }

@@ -24,8 +24,8 @@ function Rain() {
     var r = map(this.z, 0, width, 16, 0);
     ellipse(sx, sy, r, r);
 
-    var previousx = map(this.x / this.previousZ, 0, 1, 0, width);  // Update this reference
-    var previousy = map(this.y / this.previousZ, 0, 1, 0, height);  // And this one
+    var previousx = map(this.x / this.previousZ, 0, 1, 0, width);  
+    var previousy = map(this.y / this.previousZ, 0, 1, 0, height); 
 
     this.previousZ = this.z;  
 

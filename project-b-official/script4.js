@@ -7,7 +7,7 @@ let totalEnemies = 15;
 let gameOver = false;
 let stoneImage;
 let bgImage;
-let nextButton; // Button to proceed to the next page
+let nextButton; 
 
 function preload() {
   enemyImage = loadImage('lib/images/titan.png');
@@ -32,7 +32,6 @@ function draw() {
     drawPlayer(mouseX, height - 50);
   }
 
-  // Hide the button if the game is not over
   if (nextButton && !gameOver) {
     nextButton.hide();
   }
@@ -107,12 +106,11 @@ function endGame(message, success) {
   gameOver = true;
   noLoop();
 
-  // Only create the button if the player has won
   if (success) {
     if (!nextButton) {
       nextButton = createButton('Home is just up front.');
       nextButton.position(width / 2 - nextButton.width / 2, height / 2 + 40);
-      nextButton.mousePressed(() => window.location.href = 'page5.html'); // Change to your actual URL
+      nextButton.mousePressed(() => window.location.href = 'page5.html'); 
     }
     nextButton.show();
   }

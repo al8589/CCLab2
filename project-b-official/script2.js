@@ -1,4 +1,4 @@
-console.log("Script started"); // Log to check if the script file is loaded
+console.log("Script started");
 
 let player;
 let trees = [];
@@ -8,21 +8,21 @@ let flashlight;
 let flashlightFound = false;
 let btn;
 
-let mySound; // Declare the sound variable here
+let mySound; 
 let treeImage;
-let flashlightImage; // Declare flashlight image variable
+let flashlightImage; 
 
 function preload() {
-  console.log("Preloading assets"); // Log to check if preload is called
+  console.log("Preloading assets"); 
   mySound = loadSound("lib/sound/forestrain.wav", function() {
-    console.log("Sound loaded successfully"); // Log on successful load
+    console.log("Sound loaded successfully"); 
   }, function(error) {
-    console.error("Error loading sound:", error); // Log if there is an error
+    console.error("Error loading sound:", error); 
   });
   treeImage = loadImage("lib/images/darktree.png", function() {
-    console.log("Image loaded successfully"); // Log on successful load
+    console.log("Image loaded successfully"); 
   }, function(error) {
-    console.error("Error loading image:", error); // Log if there is an error
+    console.error("Error loading image:", error); 
   });
   flashlightImage = loadImage("lib/images/flashlight.png", function() {
     console.log("Flashlight image loaded successfully");
@@ -32,16 +32,16 @@ function preload() {
 }
 
 function setup() {
-  console.log("Setting up canvas"); // Log to check if setup is called
+  console.log("Setting up canvas"); 
   let canvas = createCanvas(windowWidth, windowHeight);
   canvas.style('display', 'block');
-  canvas.parent('canvasWrapper'); // Ensure canvas is inserted into the right container
+  canvas.parent('canvasWrapper'); 
   player = new Player();
 
   flashlight = {
     x: random(width),
     y: random(height),
-    size: 50 // Adjust size as needed
+    size: 50 
   };
 
   for (let i = 0; i < treeCount; i++) {
@@ -95,12 +95,12 @@ function createFoundButton() {
     btn = createButton('Found it!');
     btn.position(width / 2 - 50, height / 2 - 25);
     btn.mousePressed(goToNextPage);
-    btn.style('z-index', '2'); // Ensure the button is above the canvas
+    btn.style('z-index', '2'); // is my button above the canvas ?
   }
 }
 
 function goToNextPage() {
-  window.location.href = 'page3.html'; // Replace with the correct URL to your next page
+  window.location.href = 'page3.html';
 }
 
 function keyPressed() {
